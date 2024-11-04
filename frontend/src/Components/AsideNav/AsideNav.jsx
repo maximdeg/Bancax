@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./AsideNav.css";
+
 const AsideNav = () => {
     return (
         <aside className="aside-nav">
@@ -12,45 +14,63 @@ const AsideNav = () => {
                     <button className="btn btn-sing-up">Sign up</button>
                 </Link>
             </div>
-            <div>
+            <div className="middle-container">
                 <div className="user-info">
-                    <div>
-                        <img />
+                    <div className="user-img">
+                        <Link to="/profile/:id_user">
+                            <img src="/user-1.jpg" />
+                        </Link>
                     </div>
-                    <div>
-                        <span>Hi there!</span>
-                        <span>
-                            <Link to="/profile/:id_user">Edit profile</Link>
+                    <div className="user-name">
+                        <span className="name">Hi there!</span>
+                        <span className="user-link">
+                            <Link to="/profile/:id_user" className="link">
+                                Edit profile
+                            </Link>
                         </span>
                     </div>
                 </div>
                 <nav className="nav-menu">
                     <ul>
                         <li>
-                            <Link to="/home">Home</Link>
+                            <Link to="/home" className="link">
+                                Home
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/movements">Movements</Link>
+                            <Link to="/movements" className="link">
+                                Movements
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/category-list">Category List</Link>
+                            <Link to="/category-list" className="link">
+                                Category List
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/circle-graphic">Circle Graphic</Link>
+                            <Link to="/circle-graphic" className="link">
+                                Circle Graphic
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/bars-graphic">Bars Graphic</Link>
+                            <Link to="/bars-graphic" className="link">
+                                Bars Graphic
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/xy-graphic">X&Y Graphic</Link>
+                            <Link to="/xy-graphic " className="link">
+                                X&Y Graphic
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/settings">Settings</Link>
+                            <Link to="/settings" className="link">
+                                Settings
+                            </Link>
                         </li>
                     </ul>
                 </nav>
             </div>
-            <div></div>
+            <div className="bottom-container"></div>
         </aside>
     );
 };

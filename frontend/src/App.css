@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+    --bg-primary-color: #1a1d1d;
+    --bg-secondary-color: #171414;
+    --primary-shadow-color: #65b9b9;
+    --secondary-shadow-color: rgba(34, 255, 0, 0.885);
+
+    --text-color: #f2f2f2;
+    --border-line: 1px solid rgba(139, 139, 139, 0.433);
+    --shadow-box: 0px 0px 5px 3px var(--primary-shadow-color);
+    --hover-shadow-box: 0px 0px 5px 3px var(--secondary-shadow-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Merriweather Sans", sans-serif;
+}
+
+.btn {
+    border: none;
+    background-color: var(--bg-secondary-color);
+    padding: 6px 11px;
+    border-radius: 3px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: var(--shadow-box);
+    transition: 1s;
+}
+
+.btn:hover {
+    box-shadow: var(--hover-shadow-box);
+}
+
+.link {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.link:hover {
+    text-decoration: underline;
+    text-shadow: var(--hover-shadow-box);
+}
+
+.bottom-container {
+    height: 12dvh;
+    border-top: var(--border-line);
+}

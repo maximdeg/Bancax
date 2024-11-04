@@ -5,16 +5,31 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import AsideNav from "../AsideNav/AsideNav";
 
+import "./Layout.css";
+
 const Layout = () => {
-    const location = useLocation();
+    // const location = useLocation();
     return (
-        <>
-            {location.pathname !== "/login" && <Header />}
-            {location.pathname !== "/login" && <AsideNav />}
-            <Outlet />
-            {location.pathname !== "/login" && <Footer />}
-        </>
+        <div className="layout-container">
+            <AsideNav />
+            <div className="page-container">
+                <Header />
+                <main className="main">
+                    <Outlet />
+                </main>
+                <Footer />
+            </div>
+        </div>
     );
 };
 
 export default Layout;
+
+// <div className="layout-container">
+//             {location.pathname !== "/login" && <Header />}
+//             <main className="main">
+//                 {location.pathname !== "/login" && <AsideNav />}
+//                 <Outlet />
+//             </main>
+//             {location.pathname !== "/login" && <Footer />}
+//         </div>

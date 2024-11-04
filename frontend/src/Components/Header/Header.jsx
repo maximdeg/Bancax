@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./Header.css";
+
 const Header = () => {
     return (
-        <header>
-            <div>
+        <header className="header">
+            <div className="movement-buttons">
                 <Link to="/deposit">
                     <button className="btn btn-deposit">Deposit</button>
                 </Link>
