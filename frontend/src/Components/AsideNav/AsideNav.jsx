@@ -18,7 +18,7 @@ const AsideNav = () => {
                 <div className="user-info">
                     <div className="user-img">
                         <Link to="/profile/:id_user">
-                            <img src="/user-1.jpg" />
+                            <img src="/img/user-1.jpg" />
                         </Link>
                     </div>
                     <div className="user-name">

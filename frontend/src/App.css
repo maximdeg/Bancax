@@ -1,10 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@font-face {
+    font-family: "Starjedi"; /* Name your font family */
+    src: url("fonts/Starjedi.ttf"); /* Locate the .ttf file within your directory*/
+}
 
 :root {
     --bg-primary-color: #1a1d1d;
     --bg-secondary-color: #171414;
-    --primary-shadow-color: #65b9b9;
-    --secondary-shadow-color: rgba(34, 255, 0, 0.885);
+    --primary-shadow-color: #ff2424;
+    --secondary-shadow-color: rgba(4, 0, 255, 0.885);
 
     --text-color: #f2f2f2;
     --border-line: 1px solid rgba(139, 139, 139, 0.433);
@@ -17,6 +21,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Merriweather Sans", sans-serif;
+    /* font-family: "Starjedi", sans-serif; */
 }
 
 .btn {
