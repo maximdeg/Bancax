@@ -7,13 +7,15 @@
 :root {
     --bg-primary-color: #1a1d1d;
     --bg-secondary-color: #171414;
-    --primary-shadow-color: #ff2424;
+    --primary-shadow-color: #65b9b9;
     --secondary-shadow-color: rgba(4, 0, 255, 0.885);
 
     --text-color: #f2f2f2;
     --border-line: 1px solid rgba(139, 139, 139, 0.433);
     --shadow-box: 0px 0px 5px 3px var(--primary-shadow-color);
     --hover-shadow-box: 0px 0px 5px 3px var(--secondary-shadow-color);
+
+    --bg-form-color: #1a1d1dad;
 }
 
 * {
@@ -47,11 +49,5 @@
 }
 
 .link:hover {
-    text-decoration: underline;
     text-shadow: var(--hover-shadow-box);
-}
-
-.bottom-container {
-    height: 12dvh;
-    border-top: var(--border-line);
 }

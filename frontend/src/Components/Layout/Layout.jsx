@@ -3,21 +3,22 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import AsideNav from "../AsideNav/AsideNav";
+import Sidebar from "../Sidebar/Sidebar";
 
 import "./Layout.css";
 
 const Layout = () => {
-    // const location = useLocation();
+    const location = useLocation();
+
     return (
         <div className="layout-container">
-            <AsideNav />
+            {location.pathname !== "/login" && <Sidebar />}
             <div className="page-container">
-                <Header />
+                {location.pathname !== "/login" && <Header />}
                 <main className="main">
                     <Outlet />
                 </main>
-                <Footer />
+                {location.pathname !== "/login" && <Footer />}
             </div>
         </div>
     );
@@ -31,5 +32,5 @@ export default Layout;
 //                 {location.pathname !== "/login" && <AsideNav />}
 //                 <Outlet />
 //             </main>
-//             {location.pathname !== "/login" && <Footer />}
+//
 //         </div>
