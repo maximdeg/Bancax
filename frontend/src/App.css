@@ -8,9 +8,10 @@
     --bg-primary-color: #1a1d1d;
     --bg-secondary-color: #171414;
     --primary-shadow-color: #65b9b9;
-    --secondary-shadow-color: rgba(4, 0, 255, 0.885);
+    --secondary-shadow-color: rgba(0, 255, 55, 0.885);
 
     --text-color: #f2f2f2;
+    --link-color: rgb(105, 105, 255);
     --border-line: 1px solid rgba(139, 139, 139, 0.433);
     --shadow-box: 0px 0px 5px 3px var(--primary-shadow-color);
     --hover-shadow-box: 0px 0px 5px 3px var(--secondary-shadow-color);
@@ -25,6 +26,8 @@
     font-family: "Merriweather Sans", sans-serif;
     /* font-family: "Starjedi", sans-serif; */
 }
+
+/* GLOBAL STYLES */
 
 .btn {
     border: none;
@@ -50,4 +53,21 @@
 
 .link:hover {
     text-shadow: var(--hover-shadow-box);
+}
+
+.form-group input {
+    width: 100%;
+    padding-left: 5px;
+    height: 25px;
+    border: var(--border-line);
+    border-radius: 3px;
+    background-color: var(--bg-secondary-color);
+    color: rgb(190, 190, 190);
+    font-size: 12px;
+    outline: none;
+}
+
+.form-group label {
+    color: var(--text-color);
+    font-size: 10px;
 }
