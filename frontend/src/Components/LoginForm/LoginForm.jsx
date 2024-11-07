@@ -21,7 +21,7 @@ const LoginForm = () => {
                         <input type="checkbox" name="remember" id="remember" />
                         <label htmlFor="remember">Remember me</label>
                     </div>
-                    <Link to="/forgot-password" className="link link-forgot">
+                    <Link to="/in/forgot-password" className="link link-forgot">
                         Forgot Password?
                     </Link>
                 </div>
@@ -32,7 +32,7 @@ const LoginForm = () => {
             <div className="link-container">
                 <span>
                     New to Bancax?{" "}
-                    <Link className="link link-signup" to={"/register"}>
+                    <Link className="link link-signup" to={"/in/register"}>
                         Sign up!
                     </Link>
                 </span>

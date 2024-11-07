@@ -40,7 +40,7 @@ const Sidebar = () => {
                 <nav className="nav-menu">
                     <ul>
                         <li>
-                            <Link to="/home" className="link">
+                            <Link to="/" className="link">
                                 <FaHouse className="icon" />
                                 <span>Home</span>
                             </Link>

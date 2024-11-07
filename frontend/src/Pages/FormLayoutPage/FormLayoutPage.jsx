@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import "./FormLayout.css";
+import "./FormLayoutPage.css";
 
-const FormLayout = () => {
+const FormLayoutPage = () => {
     return (
         <section className="form-section">
             <div className="form-container">
@@ -12,4 +12,4 @@ const FormLayout = () => {
     );
 };
 
-export default FormLayout;
+export default FormLayoutPage;

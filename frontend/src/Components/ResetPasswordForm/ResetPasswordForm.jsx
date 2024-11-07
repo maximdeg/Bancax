@@ -1,21 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./RegistrationForm.css";
-const RegistrationForm = () => {
+import "./ResetPasswordForm.css";
+
+const ResetPasswordForm = () => {
     return (
         <div className="login-container">
-            <h2> Sign up</h2>
+            <h2> Password Reset Puto</h2>
             {/* <h3>Welcome back!</h3> */}
-            <form action="" className="registration-form">
-                <div className="form-group">
-                    <label htmlFor="name">Full name</label>
-                    <input type="name" name="name" id="name" placeholder="John Doe" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="example@email.com" />
-                </div>
+            <form action="" className="login-form">
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="********" />
@@ -25,13 +18,13 @@ const RegistrationForm = () => {
                     <input type="password" name="password-confirm" id="password-confirm" placeholder="********" />
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-signup">Sign Up</button>
+                    <button className="btn btn-signup">Confirm</button>
                 </div>
             </form>
             <div className="link-container">
                 <span>
                     Already have an account?{" "}
-                    <Link className="link link-signup" to={"/in/login"}>
+                    <Link className="link link-signup" to={"/register"}>
                         Log in!
                     </Link>
                 </span>
@@ -43,4 +36,4 @@ const RegistrationForm = () => {
     );
 };
 
-export default RegistrationForm;
+export default ResetPasswordForm;

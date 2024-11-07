@@ -41,7 +41,7 @@
     gap: 3px;
 }
 
-.link-forgot {
+.remember-container.link-forgot {
     color: var(--link-color);
 }
 

@@ -1,30 +1,30 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Sidebar from "../Sidebar/Sidebar";
+import Header from "../../Components/Header/Header";
+// import Footer from "../Footer/Footer";
+import Sidebar from "../../Components/Sidebar/Sidebar";
 
-import "./Layout.css";
+import "./LayoutPage.css";
 
-const Layout = () => {
+const LayoutPage = () => {
     const location = useLocation();
 
     return (
         <div className="layout-container">
-            {location.pathname !== "/login" && <Sidebar />}
+            {location.pathname !== "/in" && <Sidebar />}
             <div className="page-container">
-                {location.pathname !== "/login" && <Header />}
+                {location.pathname !== "/in" && <Header />}
                 <main className="main">
                     <Outlet />
                 </main>
-                {location.pathname !== "/login" && <Footer />}
+                {/* {location.pathname !== "/login" && <Footer />} */}
             </div>
         </div>
     );
 };
 
-export default Layout;
+export default LayoutPage;
 
 // <div className="layout-container">
 //             {location.pathname !== "/login" && <Header />}
