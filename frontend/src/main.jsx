@@ -1,13 +1,25 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { GlobalContextProvider } from "./Context/GlobalContext.jsx";
-
 import App from "./App.jsx";
 
-createRoot(document.getElementById("root")).render(
-    <GlobalContextProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </GlobalContextProvider>
-);
+const rootElement = document.getElementById("root");
+
+if (rootElement.hasChildNodes()) {
+    hydrateRoot(
+        <GlobalContextProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </GlobalContextProvider>,
+        rootElement
+    );
+} else {
+    createRoot(rootElement).render(
+        <GlobalContextProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </GlobalContextProvider>
+    );
+}

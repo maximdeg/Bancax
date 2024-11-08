@@ -25,6 +25,8 @@
     box-sizing: border-box;
     font-family: "Merriweather Sans", sans-serif;
     /* font-family: "Starjedi", sans-serif; */
+    /* width: 100dvw;
+    height: 100dvh; */
 }
 
 /* GLOBAL STYLES */
@@ -70,4 +72,76 @@
 .form-group label {
     color: var(--text-color);
     font-size: 10px;
+}
+
+/* LOADING SPINNER */
+
+.loading-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    min-width: 100dvw;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: var(--bg-primary-color);
+}
+
+/* .loading-page .lds-ripple,
+.lds-ripple div {
+    /* box-sizing: border-box; */
+/* } */
+
+.loading-page .lds-ripple {
+    color: var(--primary-shadow-color);
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.loading-page .lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.loading-page .lds-ripple div {
+    position: absolute;
+    border: 5px solid currentColor;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loading-page .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 0;
+    }
+    4.9% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 0;
+    }
+    5% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 1;
+    }
+    100% {
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+    }
 }
