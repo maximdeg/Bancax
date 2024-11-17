@@ -7,6 +7,6 @@
 
 .page-container {
     display: grid;
-    min-width: 100dvw;
+    /* min-width: 100dvw; */
     grid-template-rows: auto 1fr auto;
 }
