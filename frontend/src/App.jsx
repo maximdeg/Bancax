@@ -1,10 +1,12 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 
 import "./App.css";
 
 const HomePage = lazy(() => import("./Pages/HomePage/HomePage.jsx"));
 const MovementsPage = lazy(() => import("./Pages/MovementsPage/MovementsPage.jsx"));
+const SettingsPage = lazy(() => import("./Pages/SettingsPage/SettingsPage.jsx"));
 const LayoutPage = lazy(() => import("./Pages/LayoutPage/LayoutPage.jsx"));
 const LoginForm = lazy(() => import("./Components/LoginForm/LoginForm.jsx"));
 const FormLayoutPage = lazy(() => import("./Pages/FormLayoutPage/FormLayoutPage.jsx"));
@@ -16,9 +18,12 @@ function App() {
     return (
         <Suspense fallback={<Loading />}>
             <Routes>
-                <Route path="/" element={<LayoutPage />}>
-                    <Route index element={<HomePage />} />
-                    <Route path="movements" element={<MovementsPage />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/" element={<LayoutPage />}>
+                        <Route index element={<HomePage />} />
+                        <Route path="movements" element={<MovementsPage />} />
+                        <Route path="settings" element={<SettingsPage />} />
+                    </Route>
                 </Route>
                 <Route path="/in" element={<FormLayoutPage />}>
                     <Route index element={<LoginForm />} />

@@ -20,6 +20,13 @@ class UserRepository {
     return await user.save();
   }
 
+  static async updateUser(user_id, data) {
+    const user = await User.findOneAndUpdate({ _id: user_id }, data, {
+      new: true,
+    });
+    return user;
+  }
+
   // static async setEmailVerified(value, user_id) {
   //   const user = await UserRepository.getById(user_id);
   //   user.emailVerified = value;

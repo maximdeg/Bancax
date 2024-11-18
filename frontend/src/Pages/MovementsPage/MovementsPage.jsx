@@ -9,7 +9,7 @@ const MovementsPage = () => {
         <div className="movements-page">
             <TotalBalanceWindow />
             <MovementsWindow />
-            <AddMovementWindow />
+            {/* <AddMovementWindow /> */}
         </div>
     );
 };

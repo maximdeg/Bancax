@@ -11,13 +11,13 @@ const transactionSchema = new mongoose.Schema({
     required: [true, "The transaction has to have an amount."],
     // min: [0, "The amount has to be greater than 0.00"],
   },
-  source_id: {
-    type: mongoose.Schema.Types.ObjectId,
+  source: {
+    type: mongoose.Schema.Types.String,
     ref: "Source",
     required: [true, "The transaction has to have a source."],
   },
-  category_id: {
-    type: mongoose.Schema.Types.ObjectId,
+  category: {
+    type: mongoose.Schema.Types.String,
     ref: "Category",
     required: [true, "The transaction has to have a category."],
   },
@@ -33,9 +33,9 @@ const transactionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  is_deleted: {
+  is_active: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 

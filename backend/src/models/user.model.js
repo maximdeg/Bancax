@@ -1,6 +1,34 @@
 import mongoose from "mongoose";
 import validator from "validator";
 
+const sourceSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please provide a source name."],
+  },
+  color: {
+    type: String,
+  },
+  is_active: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+const categorySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please provide a category name."],
+  },
+  color: {
+    type: String,
+  },
+  is_active: {
+    type: Boolean,
+    default: true,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   fullname: {
     type: String,
@@ -41,14 +69,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "default.jpg",
   },
-  categories: {
-    type: Array,
-    default: [],
-  },
-  sources: {
-    type: Array,
-    default: [],
-  },
+  categories: [categorySchema],
+  sources: [sourceSchema],
   role: {
     type: String,
     enum: ["user", "admin"],
@@ -59,6 +81,7 @@ const userSchema = new mongoose.Schema({
     default: true,
     // select: false,
   },
+  verification_token: String,
   created_at: {
     type: Date,
     default: Date.now(),
@@ -67,6 +90,16 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+});
+
+userSchema.pre(/^find/, function (next) {
+  this.start = Date.now();
+  next();
+});
+
+userSchema.post(/^find/, function (docs, next) {
+  console.log(`Query took ${Date.now() - this.start} milliseconds!`);
+  next();
 });
 
 const User = mongoose.model("User", userSchema);

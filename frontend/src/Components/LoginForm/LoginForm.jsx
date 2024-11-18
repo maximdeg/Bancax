@@ -1,13 +1,46 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { POST } from "../../fetching/http.fetching";
+import { getUnnauthenticatedHeaders } from "../../utils/Headers";
+import { extractFormData } from "../../utils/extractFormData";
 
 import "./LoginForm.css";
 const LoginForm = () => {
+    const navigate = useNavigate();
+    const handleLoginForm = async (e) => {
+        try {
+            e.preventDefault();
+
+            const form_HTML = e.target;
+            const form_values = new FormData(form_HTML);
+            const form_fields = {
+                email: "",
+                password: "",
+            };
+            const form_values_object = extractFormData(form_fields, form_values);
+
+            // TODO: One of this form variables saves if the remember checkbox is checked, manage to save the session
+
+            const response = await POST("http://127.0.0.1:3000/api/v1/auth/login", {
+                headers: getUnnauthenticatedHeaders(),
+                body: JSON.stringify(form_values_object),
+            });
+
+            const access_token = response.payload.token;
+
+            sessionStorage.setItem("access_token", access_token);
+            sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
+            navigate("/");
+        } catch (err) {
+            console.error(err.message);
+            // TODO: SHOW ERROR MESSAGE HERE
+        }
+    };
     return (
         <div className="login-container">
             <h2> Login</h2>
             {/* <h3>Welcome back!</h3> */}
-            <form action="" className="login-form">
+            <form action="" className="login-form" onSubmit={handleLoginForm}>
                 <div className="form-group">
                     <label htmlFor="email">Login</label>
                     <input type="email" name="email" id="email" />
@@ -38,9 +71,7 @@ const LoginForm = () => {
                 </span>
             </div>
             <div className="copyright-container">
-                <span>
-                    © Maxim Degtiarev 2024. Only for portfolio purposes.
-                </span>
+                <span>© Maxim Degtiarev 2024. Only for portfolio purposes.</span>
             </div>
         </div>
     );
