@@ -8,7 +8,6 @@ const HomePage = () => {
     return (
         <section className="home-section">
             <TotalBalanceWindow />
-            <MovementsWindow />
         </section>
     );
 };

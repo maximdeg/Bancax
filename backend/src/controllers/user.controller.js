@@ -38,3 +38,19 @@ export const updateUserByIdController = async (req, res) => {
     );
   }
 };
+
+export const addSourceController = async (req, res) => {
+  try {
+    const user_id = req.params.user_id;
+
+    const user = await UserRepository.updateUser(user_id, req.body);
+
+    return res.status(200).json(
+      responseBuilder(true, 200, "User updated successfully", {
+        detail: user,
+      })
+    );
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import Header from "../../Components/Header/Header";
@@ -9,12 +9,13 @@ import "./LayoutPage.css";
 
 const LayoutPage = () => {
     const location = useLocation();
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="layout-container">
             {location.pathname !== "/in" && <Sidebar />}
             <div className="page-container">
-                {location.pathname !== "/in" && <Header />}
+                {location.pathname !== "/in" && <Header isOpen={isOpen} setIsOpen={setIsOpen} />}
                 <main className="main">
                     <Outlet />
                 </main>

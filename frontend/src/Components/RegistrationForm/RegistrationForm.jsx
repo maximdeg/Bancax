@@ -1,4 +1,5 @@
 import React from "react";
+import ENV from "../../env.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
 import { extractFormData } from "../../utils/extractFormData";
@@ -25,7 +26,7 @@ const RegistrationForm = () => {
             const form_values = new FormData(form_HTML);
             const form_values_object = extractFormData(form_fields, form_values);
 
-            const response = await POST("http://127.0.0.1:3000/api/v1/auth/signup", {
+            const response = await POST(`${ENV.API_URL}/api/v1/auth/signup`, {
                 headers: getUnnauthenticatedHeaders(),
                 body: JSON.stringify(form_values_object),
             });

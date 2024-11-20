@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import ENV from "../../env.js";
+// import useStorage from "../../Hooks/useStorage";
 import { POST } from "../../fetching/http.fetching";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import { extractFormData } from "../../utils/extractFormData";
@@ -7,6 +9,9 @@ import { extractFormData } from "../../utils/extractFormData";
 import "./LoginForm.css";
 const LoginForm = () => {
     const navigate = useNavigate();
+    // const { value, setValue } = useStorage("access_token", "");
+    // const { value, setUserInfoStorage } = useStorage("user_info", "");
+
     const handleLoginForm = async (e) => {
         try {
             e.preventDefault();
@@ -21,13 +26,14 @@ const LoginForm = () => {
 
             // TODO: One of this form variables saves if the remember checkbox is checked, manage to save the session
 
-            const response = await POST("http://127.0.0.1:3000/api/v1/auth/login", {
+            const response = await POST(`${ENV.API_URL}/api/v1/auth/login`, {
                 headers: getUnnauthenticatedHeaders(),
                 body: JSON.stringify(form_values_object),
             });
 
             const access_token = response.payload.token;
 
+            console.log(response.payload);
             sessionStorage.setItem("access_token", access_token);
             sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
             navigate("/");

@@ -28,21 +28,15 @@ export const GET = async (URL_API, params) => {
 };
 
 // PUT
-export const PUT = async (URL_API, body) => {
+export const PUT = async (URL_API, params) => {
     try {
-        const auth_header = sessionStorage.getItem("access_token");
-
         const response = await fetch(URL_API, {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "x-api-key": "f77fa1b6-f294-4240-adbc-32f8e84dbc62",
-                Authorization: `${auth_header}`,
-            },
-            body: JSON.stringify(body),
+            ...params,
         });
         return response.json();
     } catch (error) {
+        console.log(error);
         throw error;
     }
 };
