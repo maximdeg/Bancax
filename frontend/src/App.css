@@ -12,9 +12,10 @@
 
     --text-color: #f2f2f2;
     --link-color: rgb(105, 105, 255);
-    --border-line: 1px solid rgba(139, 139, 139, 0.433);
+    --border-color: rgba(139, 139, 139, 0.433);
     --shadow-box: 0px 0px 5px 3px var(--primary-shadow-color);
     --hover-shadow-box: 0px 0px 5px 3px var(--secondary-shadow-color);
+    --border-line: 1px solid rgba(139, 139, 139, 0.433);
 
     --bg-form-color: #1a1d1dad;
 }
