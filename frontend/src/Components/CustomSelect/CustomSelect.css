@@ -1,9 +1,3 @@
-/* $background: #e74c3c;
-#cdcdcd: #cdcdcd;
-#c03900: #c0392b;
-$select-width: 220px;
-40px: 40px; */
-
 .select-container {
     display: flex;
     flex-direction: column;
@@ -44,90 +38,16 @@ $select-width: 220px;
     background-color: var(--bg-secondary-color);
 }
 
-.select .option {
+.select-list .option {
+    display: block;
     margin: 0;
     text-indent: 15px;
     transition: all 0.15s ease-in;
+    cursor: pointer;
     /* border-top: var(--border-line); */
 }
 
-.select .option:hover {
+.select-list .option:hover {
     background-color: rgba(171, 171, 171, 0.433);
     color: var(--text-color);
 }
-
-/* .select-hidden {
-    display: none;
-    visibility: hidden;
-    padding-right: 10px;
-}
-.select {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    font-size: 16px;
-    color: #cdcdcd;
-    width: 220px;
-    height: 40px;
-}
-.select-styled {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #c03900;
-    padding: 8px 15px;
-    transition: all 0.2s ease-in;
-}
-.select-styled::after {
-    content: "";
-    width: 0;
-    height: 0;
-    border: 7px solid transparent;
-    border-color: #cdcdcd transparent transparent transparent;
-    position: absolute;
-    top: 16px;
-    right: 10px;
-}
-.select-styled:hover {
-    background-color: darken(#c03900, 2);
-}
-
-.select-styled:active,
-.select-styled .active {
-    background-color: darken(#c03900, 5);
-    &:after {
-        top: 9px;
-        border-color: transparent transparent #cdcdcd transparent;
-    }
-}
-
-.select-options {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    z-index: 999;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background-color: darken(#c03900, 5);
-}
-.select-options li {
-    margin: 0;
-    padding: 12px 0;
-    text-indent: 15px;
-    border-top: 1px solid darken(#c03900, 10);
-    transition: all 0.15s ease-in;
-}
-.select-options li:hover,
-.select-options li .is-selected {
-    color: #c03900;
-    background: #cdcdcd;
-}
-
-.select-options li [rel="hide"] {
-    display: none;
-} */

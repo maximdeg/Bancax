@@ -9,13 +9,13 @@ import "./LayoutPage.css";
 
 const LayoutPage = () => {
     const location = useLocation();
-    const [isOpen, setIsOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="layout-container">
             {location.pathname !== "/in" && <Sidebar />}
             <div className="page-container">
-                {location.pathname !== "/in" && <Header isOpen={isOpen} setIsOpen={setIsOpen} />}
+                {location.pathname !== "/in" && <Header isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
                 <main className="main">
                     <Outlet />
                 </main>

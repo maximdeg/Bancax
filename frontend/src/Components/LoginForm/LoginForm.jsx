@@ -33,9 +33,10 @@ const LoginForm = () => {
 
             const access_token = response.payload.token;
 
-            console.log(response.payload);
+            // console.log(response.payload);
             sessionStorage.setItem("access_token", access_token);
             sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
+
             navigate("/");
         } catch (err) {
             console.error(err.message);

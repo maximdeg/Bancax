@@ -9,6 +9,8 @@
     --bg-secondary-color: #171414;
     --primary-shadow-color: #65b9b9;
     --secondary-shadow-color: rgba(0, 255, 55, 0.885);
+    --cancel-shadow-color: rgba(248, 51, 51, 0.808);
+    --modal-shadow: 0 5px 20px 0 rgba(101, 185, 185, 0.527);
 
     --text-color: #f2f2f2;
     --link-color: rgb(105, 105, 255);

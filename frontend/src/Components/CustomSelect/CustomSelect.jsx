@@ -1,39 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useRef } from "react";
 
 import "./CustomSelect.css";
 
-const CustomSelect = ({ label, options, value, handleChange }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const handleToggle = () => setIsOpen(!isOpen);
-    const selectedOption = options.find((option) => option.value === value);
+function withClickHandler(Component) {
+    return function WrappedComponent(props) {
+        const handleClick = useCallback(
+            (event) => {
+                event.stopPropagation();
+                props.onClick(event);
+            },
+            [props.onClick]
+        );
 
-    const handleClick = () => {
-        setIsOpen(!isOpen);
+        return <Component {...props} onClick={handleClick} />;
     };
+}
 
-    const handleOptionClick = (option) => {
-        // handleChange(e.target.value);
-        console.log(option);
-        // setIsOpen(false);
+const ClickableListItem = withClickHandler("li");
+
+const CustomSelect = ({ label, options, handleChange }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [labelState, setLabelState] = useState(label);
+    const handleToggle = () => setIsOpen(!isOpen);
+    // const selectedOption = options.find((option) => option.value === value);
+
+    const dropdownRef = useRef(null);
+
+    const handleOptionClick = (e) => {
+        // console.log(e.target.textContent);
+        setLabelState(e.target.textContent);
+        handleChange(e.target.textContent);
+        setIsOpen(!isOpen);
     };
 
     return (
         <div className="select-container">
             <div onClick={handleToggle} className="select-label">
-                {label}
+                {labelState}
             </div>
             <ul className="select-list" type="category" name="category" id="category">
                 {isOpen &&
                     options.map((option) => (
-                        <li
+                        <ClickableListItem
                             key={option.id}
                             className="option"
                             style={{ color: option.color }}
                             value={option.value}
-                            onClick={handleOptionClick(option)}
+                            onClick={(e) => handleOptionClick(e)}
                         >
                             {option.value}
-                        </li>
+                        </ClickableListItem>
                     ))}
             </ul>
         </div>
