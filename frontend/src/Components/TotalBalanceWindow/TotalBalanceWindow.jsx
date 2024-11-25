@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./TotalBalanceWindow.css";
+import useMovements from "../../Hooks/useMovements";
 
 const TotalBalanceWindow = () => {
+    const { movements, isLoadingMovements } = useMovements();
+
+    const [totalBalance, setTotalBalance] = useState(0);
+
+    useEffect(() => {
+        setTotalBalance(movements.reduce((acc, movement) => acc + movement.amount, 0));
+    }, [movements]);
+
     return (
         <div className="total-balance-window">
             <div className="total-balance">
                 <h3>Total balance</h3>
-                <span>AR$ 5432.10</span>
+                <span>AR$ {isLoadingMovements ? "..." : totalBalance}</span>
             </div>
             <div className="total-balance-details">
                 <h4>Details</h4>

@@ -7,8 +7,6 @@ export const useForm = (formFields) => {
         const input_name = e.target.name;
         const input_value = e.target.value;
 
-        console.log({ input_name, input_value });
-
         setFormValuesState((prevFormValuesState) => {
             return { ...prevFormValuesState, [input_name]: input_value };
         });

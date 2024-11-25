@@ -28,7 +28,7 @@ const GlobalContextProvider = ({ children }) => {
                 body: JSON.stringify(user),
             });
 
-            sessionStorage.setItem("user_info", JSON.stringify(response.payload.detail));
+            sessionStorage.setItem("user_info", JSON.stringify(user));
 
             console.log(response.payload.detail);
         } catch (err) {

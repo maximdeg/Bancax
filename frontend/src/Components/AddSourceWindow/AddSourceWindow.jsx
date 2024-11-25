@@ -41,12 +41,10 @@ export default AddSourceWindow;
 const SourceList = () => {
     const { sources } = JSON.parse(sessionStorage.getItem("user_info"));
 
-    const [list, setList] = useState(sources);
-
     return (
         <div className="list-container">
             <ul className="list">
-                {list.map((source) => {
+                {sources.map((source) => {
                     return (
                         <li key={source._id} style={{ color: source.color }} className="list-item">
                             <strong>{source.name}</strong>

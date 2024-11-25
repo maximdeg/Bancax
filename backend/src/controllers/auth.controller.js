@@ -31,6 +31,7 @@ export const createUserController = async (req, res) => {
       fullname,
       email,
       password: hashed_password,
+      password_confirm: hashed_password,
       verification_token: verificationToken,
     };
 
