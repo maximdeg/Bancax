@@ -27,7 +27,6 @@ const transactionSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now(),
-    required: [true, "The transaction has to have a date."],
   },
   created_at: {
     type: Date,

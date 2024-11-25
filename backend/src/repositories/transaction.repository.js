@@ -14,7 +14,7 @@ class TransactionRepository {
   // Get all transactions from this user
   static async getAllTransactionsByUserId(user_id) {
     const transactions = await Transaction.find({ user_id });
-    return transactions || [];
+    return transactions || {};
   }
 
   // Get all transactions from this user with this source

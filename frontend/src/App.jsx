@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import LoadingSpinner from "./Components/LoadingSpinner/LoadingSpinner.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 
 import "./App.css";
@@ -16,7 +17,7 @@ const ForgotPasswordForm = lazy(() => import("./Components/ForgotPasswordForm/Fo
 
 function App() {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingSpinner />}>
             <Routes>
                 <Route element={<ProtectedRoute />}>
                     <Route path="/" element={<LayoutPage />}>
@@ -38,14 +39,3 @@ function App() {
 }
 
 export default App;
-
-const Loading = () => {
-    return (
-        <div className="loading-page">
-            <div className="lds-ripple" bis_skin_checked="1">
-                <div bis_skin_checked="1"></div>
-                <div bis_skin_checked="1"></div>
-            </div>
-        </div>
-    );
-};

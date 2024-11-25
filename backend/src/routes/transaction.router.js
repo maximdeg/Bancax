@@ -7,6 +7,6 @@ import {
 const transactionRouter = express.Router();
 
 transactionRouter.post("/", createTransactionController);
-transactionRouter.get("/", getAllTransactionsController);
+transactionRouter.get("/:user_id", getAllTransactionsController);
 
 export default transactionRouter;
