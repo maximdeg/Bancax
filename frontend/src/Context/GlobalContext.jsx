@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 import { PUT } from "../fetching/http.fetching";
 import { extractFormData } from "../utils/extractFormData.js";
 import { getAuthenticatedHeaders } from "../utils/Headers.js";
@@ -7,6 +7,8 @@ import ENV from "../env.js";
 const GlobalContext = React.createContext();
 
 const GlobalContextProvider = ({ children }) => {
+    // TODO: Change all session storages for global context
+
     const handleAddForm = async (e, property) => {
         try {
             e.preventDefault();

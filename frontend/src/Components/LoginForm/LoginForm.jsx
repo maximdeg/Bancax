@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ENV from "../../env.js";
 // import useStorage from "../../Hooks/useStorage";
@@ -7,10 +7,10 @@ import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import { extractFormData } from "../../utils/extractFormData";
 
 import "./LoginForm.css";
+import { useAuthContext } from "../../Context/AuthContext.jsx";
 const LoginForm = () => {
     const navigate = useNavigate();
-    // const { value, setValue } = useStorage("access_token", "");
-    // const { value, setUserInfoStorage } = useStorage("user_info", "");
+    const { setIsAuthenticatedUser } = useAuthContext();
 
     const handleLoginForm = async (e) => {
         try {
@@ -36,7 +36,7 @@ const LoginForm = () => {
             // console.log(response.payload);
             sessionStorage.setItem("access_token", access_token);
             sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
-
+            setIsAuthenticatedUser(true);
             navigate("/");
         } catch (err) {
             console.error(err.message);

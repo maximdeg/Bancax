@@ -3,7 +3,6 @@ import { responseBuilder } from "../utils/builders/responseBuilder.js";
 
 export const getAllTransactionsController = async (req, res) => {
   try {
-    // FIXME: GET USER_ID FROM SESSION STORAGE
     const { user_id } = req.params;
     const transactions = await TransactionRepository.getAllTransactionsByUserId(
       user_id

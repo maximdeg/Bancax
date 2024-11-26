@@ -92,15 +92,16 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre(/^find/, function (next) {
-  this.start = Date.now();
-  next();
-});
+// userSchema.pre(/^find/, function (next) {
+//   this.start = Date.now();
+//   next();
+// });
 
-userSchema.post(/^find/, function (docs, next) {
-  console.log(`Query took ${Date.now() - this.start} milliseconds!`);
-  next();
-});
+// Duration of post actions on mongoose
+// userSchema.post(/^find/, function (docs, next) {
+//   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
+//   next();
+// });
 
 const User = mongoose.model("User", userSchema);
 

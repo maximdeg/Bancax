@@ -51,6 +51,11 @@ export const addSourceController = async (req, res) => {
       })
     );
   } catch (err) {
-    console.log(err);
+    res.status(500).json(
+      responseBuilder(false, 500, "SERVER_ERROR", {
+        location: "updateUserByIdController",
+        message: err.message,
+      })
+    );
   }
 };
