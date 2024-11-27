@@ -49,10 +49,6 @@ export const verifyTokenMiddleware = (permited_roles = []) => {
 export const verifyApiKeyMiddleware = (req, res, next) => {
   try {
     const apikey_header = req.header("x-api-key");
-    console.log({
-      parenthesis: `${apikey_header} con req.header("x-api-key")`,
-      braquets: `${apikey_header} con req.headers["x-api-key"]`,
-    });
 
     if (!apikey_header) {
       return res.status(401).json(

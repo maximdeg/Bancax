@@ -11,6 +11,11 @@ import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = () => {
+    const { fullname, id, photo } = JSON.parse(sessionStorage.getItem("user_info"));
+    const edit_profile_url = `/profile/${id}`;
+    console.log(photo);
+    const photo_src = `/img/${photo}`;
+
     return (
         <aside className="aside-nav">
             <div className="sign-in-container">
@@ -24,14 +29,14 @@ const Sidebar = () => {
             <div className="middle-container">
                 <div className="user-info">
                     <div className="user-img">
-                        <Link to="/profile/:id_user">
-                            <img src="/img/user-1.jpg" />
+                        <Link to={edit_profile_url}>
+                            <img src={photo_src} />
                         </Link>
                     </div>
                     <div className="user-name">
-                        <span className="name">Hi there!</span>
+                        <span className="name">Hi {fullname.split(" ")[0]}!</span>
                         <span className="user-link">
-                            <Link to="/profile/:id_user" className="link">
+                            <Link to={edit_profile_url} className="link">
                                 Edit profile
                             </Link>
                         </span>

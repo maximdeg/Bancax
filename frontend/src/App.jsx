@@ -24,6 +24,7 @@ function App() {
                         <Route index element={<HomePage />} />
                         <Route path="movements" element={<MovementsPage />} />
                         <Route path="settings" element={<SettingsPage />} />
+                        <Route path="profile/:id" element={<SettingsPage />} />
                     </Route>
                 </Route>
                 <Route path="/in" element={<FormLayoutPage />}>

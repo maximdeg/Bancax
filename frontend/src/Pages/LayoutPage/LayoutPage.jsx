@@ -26,12 +26,3 @@ const LayoutPage = () => {
 };
 
 export default LayoutPage;
-
-// <div className="layout-container">
-//             {location.pathname !== "/login" && <Header />}
-//             <main className="main">
-//                 {location.pathname !== "/login" && <AsideNav />}
-//                 <Outlet />
-//             </main>
-//
-//         </div>
