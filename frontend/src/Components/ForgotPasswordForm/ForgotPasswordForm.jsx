@@ -1,10 +1,23 @@
 import React from "react";
 import "./ForgotPasswordForm.css";
 import { Link } from "react-router-dom";
+import ENV from "../../env.js";
+import { getUnnauthenticatedHeaders } from "../../utils/Headers";
+import { POST } from "../../fetching/http.fetching";
 
 const ForgotPasswordForm = () => {
-    const handleSubmitEmail = (e) => {
+    const handleSubmitEmail = async (e) => {
         e.preventDefault();
+
+        const email = e.target.email.value;
+        console.log(email);
+
+        const response = await POST(`${ENV.API_URL}/api/v1/auth/forgot-password`, {
+            headers: getUnnauthenticatedHeaders(),
+            body: JSON.stringify({ email }),
+        });
+
+        console.log(response);
     };
     return (
         <div className="login-container">

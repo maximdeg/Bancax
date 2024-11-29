@@ -626,7 +626,7 @@ const resetPasswordTokenHTML = (url, userName) => {
                                   >
                                     <p style="font-size: 14px; line-height: 180%">
                                       <strong
-                                        >${userName},&nbsp; &nbsp;T O&nbsp; &nbsp;R E S E T&nbsp; &nbsp;Y O U R&nbsp; &nbsp;P A S S W O R D</strong
+                                        >${userName.toUpperCase()},&nbsp; &nbsp;T O&nbsp; &nbsp;R E S E T&nbsp; &nbsp;Y O U R&nbsp; &nbsp;P A S S W O R D</strong
                                       >
                                     </p>
                                     <p style="font-size: 14px; line-height: 180%">
