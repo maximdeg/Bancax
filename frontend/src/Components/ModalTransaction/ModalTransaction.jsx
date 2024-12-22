@@ -1,27 +1,32 @@
-import React, { useState, useRef } from "react";
-import CustomSelect from "../CustomSelect/CustomSelect";
+import React, { useState } from "react";
+import ENV from "../../env";
 import { ImCross } from "react-icons/im";
-
-import "./ModalTransaction.css";
-import { getAuthenticatedHeaders } from "../../utils/Headers";
-import { extractFormData } from "../../utils/extractFormData";
 import { useForm } from "../../Hooks/useForm";
 import { POST } from "../../fetching/http.fetching";
-import ENV from "../../env";
-// import { RiCloseLine } from "react-icons/ri";
+import LoadingDots from "../LoadingDots/LoadingDots";
+import CustomSelect from "../CustomSelect/CustomSelect";
+import { validateFields } from "../../utils/validateFields";
+import { extractFormData } from "../../utils/extractFormData";
+import { getAuthenticatedHeaders } from "../../utils/Headers";
+import { useGlobalContext } from "../../Context/GlobalContext";
+
+import "./ModalTransaction.css";
 
 const ModalTransaction = ({ label, setIsModalOpen }) => {
-    // FIXME:
-    // TODO: Change all session storages for global context
+    const today = new Date().toISOString().split("T")[0];
+    const { getStorageUserInfo, getSourcesAndCategoriesFromStorage } = useGlobalContext();
 
-    const { sources, categories, id } = JSON.parse(sessionStorage.getItem("user_info"));
-    const sourceOptions = sources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
-    const categoryOptions = categories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
-    const [selectedDate, setSelectedDate] = useState("1997-04-18");
-    const formRef = useRef(null);
+    const { id } = getStorageUserInfo();
+    const { activeSources, activeCategories } = getSourcesAndCategoriesFromStorage();
 
-    const [selectedSourceState, setSelectedSourceState] = useState(sources[0]);
-    const [selectedCategoryState, setSelectedCategoryState] = useState(categories[0]);
+    const sourceOptions = activeSources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
+    const categoryOptions = activeCategories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
+    const [isLoading, setIsLoading] = useState(false);
+    const [outputMessages, setOutputMessages] = useState([]);
+    const [outputErrors, setOutputErrors] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(today);
+    const [selectedSourceState, setSelectedSourceState] = useState(sourceOptions[0]);
+    const [selectedCategoryState, setSelectedCategoryState] = useState(categoryOptions[0]);
 
     const form_fields = {
         amount: "",
@@ -47,6 +52,11 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
         setSelectedDate(formattedDate);
     };
 
+    const setLoadingAndOutputStates = (message) => {
+        setOutputErrors(() => [...message]);
+        setIsLoading(true);
+    };
+
     const handleTransactionForm = async (e) => {
         try {
             e.preventDefault();
@@ -55,30 +65,55 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             const form_values = new FormData(form_HTML);
             const form_values_object = extractFormData(form_fields, form_values);
 
+            setIsLoading(true);
+
             form_values_object.user_id = id;
             form_values_object.source = selectedSourceState;
             form_values_object.category = selectedCategoryState;
+            form_values_object.date = selectedDate.toString();
+
+            const errors = validateFields(form_values_object);
             form_values_object.amount = label === "Withdraw" ? form_values_object.amount - form_values_object.amount * 2 : form_values_object.amount;
-            //FIXME: solve the date saving, right now mongoose is saving by default
-            form_values_object.date = selectedDate ? selectedDate.toString() : new Date().toISOString().split("T")[0];
 
-            // TODO: One of this form variables saves if the remember checkbox is checked, manage to save the session
+            if (errors.length > 0) {
+                setLoadingAndOutputStates(errors);
+                return;
+            }
 
-            const response = await POST(`${ENV.API_URL}/api/v1/transactions`, {
+            const response = await POST(`${ENV.API_URL}/api/v1/transactions/${id}`, {
                 headers: getAuthenticatedHeaders(),
                 body: JSON.stringify(form_values_object),
             });
 
-            console.log({ response });
+            if (!response.ok) {
+                setLoadingAndOutputStates({ message: response.payload.detail });
+                return;
+            }
+
+            console.log(response);
+
+            setOutputErrors(() => []);
+            setIsLoading(false);
+            setOutputMessages((prevMessages) => [
+                ...prevMessages,
+                {
+                    message: "Transaction added successfully",
+                    amount: response.payload.detail.amount,
+                    source: response.payload.detail.source,
+                    date: response.payload.detail.date,
+                    border: `3px solid ${sourceOptions.find((source) => source.value === response.payload.detail.source).color}`,
+                },
+            ]);
+
+            form_HTML.reset();
         } catch (err) {
+            setLoadingAndOutputStates({ message: err.message });
             console.error(err.message);
-            // TODO: SHOW ERROR MESSAGE HERE
+            if (err.message === "Failed to fetch") {
+                return setLoadingAndOutputStates("Server is not working well at the moment. Please try again later.");
+            }
         }
     };
-
-    // const handleSubmit = () => {
-    //     formRef.current.submit();
-    // };
 
     return (
         <>
@@ -92,7 +127,7 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                         <ImCross />
                     </button>
                     <div className="modalContent">
-                        <form ref={formRef} className="add-movement-form" onSubmit={(event) => handleTransactionForm(event)}>
+                        <form className="add-movement-form" onSubmit={(event) => handleTransactionForm(event)}>
                             <div className="form-group amount-container">
                                 <label htmlFor="amount">Amount</label>
                                 <input type="amount" name="amount" id="amount" onChange={handleChangeInputValue} />
@@ -109,16 +144,50 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                                 <label htmlFor="date">Date</label>
                                 <input type="date" name="date" id="date" value={selectedDate} onChange={handleChangeDate} />
                             </div>
-                            <button type="submit" style={{ display: "none" }} />
+                            {outputErrors.length !== 0 && (
+                                <div className="output-messages-container">
+                                    {outputErrors.map((message, index) => {
+                                        return (
+                                            <div className="output-message" key={index} style={{ color: message.color || "red" }}>
+                                                <span>{message.message}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                            {outputMessages.length !== 0 && (
+                                <div className="succesful-transaction-container">
+                                    <ul>
+                                        {outputMessages.map((transaction, index) => (
+                                            <li key={index} style={{ borderLeft: transaction.border || "none" }}>
+                                                <div>
+                                                    <span style={{ marginLeft: "8px" }}>{transaction.message}</span>
+                                                </div>
+                                                <span style={{ marginLeft: "8px" }}>
+                                                    $ {transaction.amount}
+                                                    {" ---> "}
+                                                    {transaction.source} {" on "} {new Date(transaction.date).toLocaleDateString("es-AR")}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                            <div className="modalActions">
+                                <div className="actionsContainer">
+                                    <button className="cancelBtn" onClick={() => setIsModalOpen(false)}>
+                                        Cancel
+                                    </button>
+                                    {isLoading ? (
+                                        <button type="button" className="submitBtn">
+                                            <LoadingDots />
+                                        </button>
+                                    ) : (
+                                        <button className="submitBtn">Add deposit</button>
+                                    )}
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                    <div className="modalActions">
-                        <div className="actionsContainer">
-                            <button className="cancelBtn" onClick={() => setIsModalOpen(false)}>
-                                Cancel
-                            </button>
-                            <button className="submitBtn">Add deposit</button>
-                        </div>
                     </div>
                 </div>
             </div>

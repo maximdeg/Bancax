@@ -6,12 +6,14 @@ import "./MovementsWindow.css";
 const MovementsWindow = () => {
     const { movements, isLoadingMovements } = useMovements();
 
+    const movementOrderedByDate = movements.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return (
         <div className="movements-window">
             <div className="movements-title">
                 <h2>Movements</h2>
             </div>
-            {isLoadingMovements ? <LoadingSpinner /> : <MovementsList movements={movements} />}
+            {isLoadingMovements ? <LoadingSpinner /> : <MovementsList movements={movementOrderedByDate} />}
         </div>
     );
 };
@@ -30,16 +32,27 @@ const MovementsList = ({ movements }) => {
 
 const MovementCard = ({ movement }) => {
     const { category, source, amount, description, date } = movement;
+
+    const formattedDate = new Date(date).toLocaleDateString("es-AR");
+
     return (
-        <div className="movement-card">
-            <div>
-                <div>{date.split("T")[0]}</div>
-                <div style={amount > 0 ? { color: "green" } : { color: "red" }}>{amount}</div>
-                <div>{source}</div>
+        <div className="movement-card" style={amount > 0 ? { borderLeft: "6px solid green" } : { borderLeft: "6px solid red" }}>
+            <div className="left-side">
+                <div>
+                    <span className="date">{formattedDate}</span>
+                </div>
+                <div className="amount-source">
+                    <span className="amount">$ {amount}</span>
+                    <span className="source">{source}</span>
+                </div>
             </div>
-            <div>
-                <div>{category}</div>
-                <div>{description}</div>
+            <div className="right-side">
+                <div>
+                    <span className="category">{category}</span>
+                </div>
+                <div>
+                    <span className="description">{description}</span>
+                </div>
             </div>
         </div>
     );

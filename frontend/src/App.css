@@ -7,10 +7,14 @@
 :root {
     --bg-primary-color: #1a1d1d;
     --bg-secondary-color: #171414;
+    --bg-secondary-color-transparent: #171414bc;
+    --bg-secondary-color-transparent-more: #1714143b;
+
+    --bg-secondary-color-lighter: #635a5abc;
     --primary-shadow-color: #65b9b9;
     --secondary-shadow-color: rgba(0, 255, 55, 0.885);
     --cancel-shadow-color: rgba(248, 51, 51, 0.808);
-    --modal-shadow: 0 5px 20px 0 rgba(101, 185, 185, 0.527);
+    --modal-shadow: 0 0px 20px 0 rgba(101, 185, 185, 0.871);
 
     --text-color: #f2f2f2;
     --link-color: rgb(105, 105, 255);
@@ -18,7 +22,7 @@
     --shadow-box: 0px 0px 5px 3px var(--primary-shadow-color);
     --hover-shadow-box: 0px 0px 5px 3px var(--secondary-shadow-color);
     --border-line: 1px solid rgba(139, 139, 139, 0.433);
-
+    --color: #f50c0c;
     --bg-form-color: #1a1d1dad;
 }
 
@@ -28,8 +32,29 @@
     box-sizing: border-box;
     font-family: "Merriweather Sans", sans-serif;
     /* font-family: "Starjedi", sans-serif; */
-    /* width: 100dvw;
-    height: 100dvh; */
+}
+
+body {
+    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
+}
+
+body::-webkit-scrollbar {
+    width: 5px;
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--bg-primary-color);
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--primary-shadow-color);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-shadow-color);
 }
 
 /* GLOBAL STYLES */
@@ -42,7 +67,7 @@
     color: var(--text-color);
     cursor: pointer;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     box-shadow: var(--shadow-box);
     transition: 1s;
 }
@@ -58,17 +83,18 @@
 
 .link:hover {
     text-shadow: var(--hover-shadow-box);
+    text-decoration: underline;
 }
 
 .form-group input {
     width: 100%;
     padding-left: 5px;
-    height: 25px;
+    height: 30px;
     border: var(--border-line);
     border-radius: 3px;
     background-color: var(--bg-secondary-color);
     color: rgb(190, 190, 190);
-    font-size: 12px;
+    font-size: 14px;
     outline: none;
 }
 
@@ -88,29 +114,134 @@
     transition: 0.9s;
 }
 
+.login-container {
+    display: grid;
+    flex-direction: column;
+    margin: 20px;
+    /* gap: 5px; */
+    width: 100%;
+    /* height: 100%; */
+    color: var(--text-color);
+}
+
+.logo-container {
+    width: 100%;
+    height: 5rem;
+    overflow: hidden;
+}
+.logo-container img {
+    width: 100%;
+}
+
+.login-container h2 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.login-container .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px 20px 20px 20px;
+    width: 100%;
+    border-radius: 8px;
+    border: var(--border-line);
+    background-color: var(--bg-form-color);
+}
+
+.login-container .login-form .remember-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+}
+
+.login-container .login-form .remember-container div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.remember-container.link-forgot {
+    color: var(--link-color);
+}
+
+.link-forgot:hover {
+    text-decoration: underline;
+}
+
+.btn-signin {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    font-size: 12px;
+}
+
+.link-container .link-signup {
+    color: var(--link-color);
+}
+
+.link-container .link-signup:hover {
+    text-decoration: underline;
+}
+
+.copyright-container {
+    display: flex;
+    align-self: flex-end;
+    justify-self: center;
+    font-size: 8px;
+}
+
+/* ERROR CONTAINER OUTPUT MESSAGES */
+
+.output-messages-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    border-radius: 8px;
+    border: var(--border-line);
+    background-color: var(--bg-form-color);
+    text-align: center;
+    font-size: 10px;
+    color: var(--cancel-shadow-color);
+}
+
 /* LOADING SPINNER */
 
 .loading-page {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100dvh;
+    width: 100dvw;
+    background-color: var(--bg-secondary-color);
+}
+
+.movements {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
-    /* width: 100dvw; */
-    /* height: 100dvh; */
     background-color: transparent;
 }
 
 /* .loading-page .lds-ripple,
 .lds-ripple div {
-    /* box-sizing: border-box; */
-/* } */
+    box-sizing: border-box;
+} */
 
 .loading-page .lds-ripple {
     color: var(--primary-shadow-color);
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
 }
 
 .loading-page .lds-ripple {
@@ -157,5 +288,73 @@
         width: 80px;
         height: 80px;
         opacity: 0;
+    }
+}
+
+/* EDIT PROFILE PAGE AND SETTINGS STYLES */
+
+.edit-profile-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-primary-color);
+    padding: 15px 20% 40px 20%;
+    color: var(--text-color);
+}
+
+.edit-profile-page h2 {
+    margin-bottom: 10px;
+}
+
+.containers {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 35%;
+    width: 100%;
+    /* height: 100%; */
+    gap: 20px;
+}
+
+.edit-profile-window {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 5px 20px;
+}
+
+.edit-profile-window .form-group-user {
+    flex-direction: row;
+}
+
+.edit-profile-window .form-group-user .btn-container {
+    justify-self: end;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 760px) {
+    .edit-profile-page {
+        padding: 15px 10% 40px 10%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .edit-profile-page {
+        padding: 15px 5% 40px 5%;
+    }
+
+    .containers {
+        grid-template-columns: 100%;
+    }
+
+    .containers .btn-choose-file {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .edit-profile-page {
+        /* border: 3px solid red; */
+        padding: 15px 5% 40px 5%;
     }
 }

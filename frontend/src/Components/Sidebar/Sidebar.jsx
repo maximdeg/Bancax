@@ -5,7 +5,7 @@ import { TbCashRegister } from "react-icons/tb";
 import { BiCategoryAlt } from "react-icons/bi";
 import { ImStatsBars } from "react-icons/im";
 import { VscGraphLine } from "react-icons/vsc";
-import { FiSettings } from "react-icons/fi";
+import { RxGear } from "react-icons/rx";
 
 import { Link } from "react-router-dom";
 
@@ -13,28 +13,12 @@ import "./Sidebar.css";
 
 const Sidebar = () => {
     const { isAuthenticatedUser, logout } = useAuthContext();
-    const { fullname, id, photo } = JSON.parse(sessionStorage.getItem("user_info"));
+    const { fullname, id, photo } = JSON.parse(localStorage.getItem("user_info"));
     const edit_profile_url = `/profile/${id}`;
-    const photo_src = `/img/${photo}`;
+    const photo_src = photo ? photo : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
 
     return (
         <aside className="aside-nav">
-            <div className="sign-in-container">
-                {isAuthenticatedUser ? (
-                    <button className="btn btn-logout" onClick={logout}>
-                        Logout
-                    </button>
-                ) : (
-                    <>
-                        <Link to="/in/login">
-                            <button className="btn btn-login">Login</button>
-                        </Link>
-                        <Link to="/in/register">
-                            <button className="btn btn-sing-up">Sign up</button>
-                        </Link>
-                    </>
-                )}
-            </div>
             <div className="middle-container">
                 <div className="user-info">
                     <div className="user-img">
@@ -53,7 +37,7 @@ const Sidebar = () => {
                 </div>
                 <nav className="nav-menu">
                     <ul>
-                        <li>
+                        <li data-toolip="Total balance and tutorial">
                             <Link to="/" className="link">
                                 <FaHouse className="icon" />
                                 <span>Home</span>
@@ -72,33 +56,50 @@ const Sidebar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/circle-graphic" className="link">
+                            <div className="link disabled">
                                 <FaCodiepie className="icon" />
                                 <span>Circle Graphic</span>
-                            </Link>
+                            </div>
                         </li>
                         <li>
-                            <Link to="/bars-graphic" className="link">
+                            <div className="link disabled">
                                 <ImStatsBars className="icon" />
                                 <span>Bars Graphic</span>
-                            </Link>
+                            </div>
                         </li>
                         <li>
-                            <Link to="/xy-graphic " className="link">
+                            <div className="link disabled">
                                 <VscGraphLine className="icon" />
                                 <span>Line Graphic</span>
-                            </Link>
+                            </div>
                         </li>
                         <li>
                             <Link to="/settings" className="link">
-                                <FiSettings className="icon" />
+                                <RxGear className="icon" />
                                 <span>Settings</span>
                             </Link>
                         </li>
                     </ul>
                 </nav>
+                {isAuthenticatedUser ? (
+                    <button className="btn btn-logout" onClick={logout}>
+                        Logout
+                    </button>
+                ) : (
+                    <>
+                        <Link to="/in/login">
+                            <button className="btn btn-login">Login</button>
+                        </Link>
+                        <Link to="/in/register">
+                            <button className="btn btn-sing-up">Sign up</button>
+                        </Link>
+                    </>
+                )}
             </div>
-            <div className="bottom-container"></div>
+            <div className="bottom-container">
+                <img src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/small-logo_f0jlfh.png" alt="bancax-small-logo" />
+                <span className="version">Version 1.0.0</span>
+            </div>
         </aside>
     );
 };
